@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +6,7 @@ public class WordTagFrequency {
     private final Tags tags;
 
     private final PoSData pdata;
-    private final Map<String, List<Integer>> frequency;
+    private final Map<String, int[]> frequency;
 
     public WordTagFrequency(PoSData pd) {
         this.pdata = pd;
@@ -15,16 +14,23 @@ public class WordTagFrequency {
         this.frequency = new HashMap<>();
 
         for (Sentence s : this.pdata.getSentences()) {
-            System.out.print("");
+            List<String> a = s.getWords();
+            List<Integer> b = s.getTags();
+            for (int i = 0; i < a.size(); i++) {
+                addWord(a.get(i), b.get(i));
+            }
         }
     }
 
     public void addWord(String word, int n) {
         if (!this.frequency.containsKey(word)) {
-            ArrayList<Integer> al = new ArrayList<Integer>();
+            int[] al = new int[tags.getSize()];
             this.frequency.put(word, al);
         }
-        int value = this.frequency.get(word).get(n);
-        this.frequency.get(word).set(n, ++value);
+        this.frequency.get(word)[n]++;// = this.frequency.get(word)[n]+1;
+    }
+
+    public Map<String, int[]> getFrequency() {
+        return this.frequency;
     }
 }
