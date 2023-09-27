@@ -3,8 +3,8 @@ import java.util.List;
 
 public class Sentence {
 
-    private List<String> words;
-    private List<Integer> tags;
+    private final List<String> words;
+    private final List<Integer> tags;
 
     public Sentence() {
         this.words = new ArrayList<String>();
@@ -35,5 +35,4 @@ public class Sentence {
     public int getWordIndex(String word) {
         return this.words.indexOf(word);
     }
-
 }

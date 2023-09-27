@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Tags {
 
-    private Map<String, Integer> tags;
+    private final Map<String, Integer> tags;
     private Integer size;
 
     public Tags() {

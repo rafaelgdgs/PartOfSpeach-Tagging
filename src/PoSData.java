@@ -3,8 +3,8 @@ import java.util.List;
 
 public class PoSData {
 
-    private List<Sentence> words;
-    private Tags tags;
+    private final List<Sentence> words;
+    private final Tags tags;
 
     public PoSData() {
         this.words = new ArrayList<Sentence>();
@@ -13,6 +13,10 @@ public class PoSData {
 
     public List<Sentence> getSentences() {
         return this.words;
+    }
+
+    public Tags getTags() {
+        return this.tags;
     }
 
     public String[] getTagsArray() {
