@@ -33,4 +33,8 @@ public class Tags {
     public Map<String, Integer> getTagsMap() {
         return this.tags;
     }
+
+    public int getSize() {
+        return this.size;
+    }
 }

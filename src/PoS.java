@@ -16,10 +16,16 @@ public class PoS {
 		}*/
 
         PoSData data = FileReader.readFromFile(path);
+        WordTagFrequency wtf = new WordTagFrequency(data);
 
         //System.out.println(Arrays.toString(data.getWordsArray()));
         System.out.println(Arrays.toString(data.getTagsArray()));
         System.out.println(Arrays.toString(data.getTagsIndex()));
+
+        for (String key: wtf.getFrequency().keySet()) {
+            //String value = Arrays.toString(wtf.getFrequency().get(key));
+            System.out.println(key + " " + Arrays.toString(wtf.getFrequency().get(key)));
+        }
 
         try (Scanner scanner = new Scanner(System.in)) {
             String s;
