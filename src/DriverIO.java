@@ -2,8 +2,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DriverIO {
 
@@ -43,23 +41,29 @@ public class DriverIO {
             String tagsString = myReader.nextLine();
             Tags tags = new Tags();
 
-            Pattern pattern = Pattern.compile(",\\s(\\w+)");
-            Matcher matcher = pattern.matcher(tagsString);
-
-            boolean primeiro = true;
-
-            while (matcher.find()) {
-                String tag = matcher.group();
-                if (!primeiro) {
-                    System.out.println(tag);
-                }
-                primeiro = false;
+            tagsString = tagsString.replace("Tags [", "");
+            tagsString = tagsString.replace("]", ", ");
+            for (String t: tagsString.split(", ")) {
+                tags.addTag(t);
             }
 
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
+            //Pattern pattern = Pattern.compile("(\\[?.+?,[ |\\]])");
+            //Matcher matcher = pattern.matcher(tagsString);
 
-            }
+            //boolean primeiro = true;
+
+            //while (matcher.find()) {
+            //    String tag = matcher.group();
+            //    if (primeiro) {
+            //        //System.out.println(tag);
+            //    }
+            //    primeiro = false;
+            //    System.out.println(tag);
+            //}
+
+            //while (myReader.hasNextLine()) {
+            //    String data = myReader.nextLine();
+            //}
 
             myReader.close();
         } catch (Exception e) {
