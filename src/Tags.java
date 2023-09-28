@@ -34,4 +34,13 @@ public class Tags {
     public int getSize() {
         return this.size;
     }
+
+    public String getKey(int value) {
+        for (Map.Entry<String, Integer> entry: tags.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
 }

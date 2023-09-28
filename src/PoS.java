@@ -29,7 +29,7 @@ public class PoS {
 
         try {
             FileWriter myWriter = new FileWriter("out/PoS Output.txt");
-            myWriter.write("Tags" + ks + "\n");
+            myWriter.write("Tags " + ks + "\n");
             for (String key: wtf.getFrequency().keySet()) {
                 myWriter.write(key + " " + Arrays.toString(wtf.getFrequency().get(key)) + "\n");
             }
@@ -45,7 +45,7 @@ public class PoS {
             try {
                 do {
                     s = scanner.nextLine();
-
+                    System.out.println(wtf.probableTag(s));
                 } while (!s.isEmpty());
             } catch(IllegalStateException | NoSuchElementException e) {
                 System.out.println("System.in was closed; exiting");

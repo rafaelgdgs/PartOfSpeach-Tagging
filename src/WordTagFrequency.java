@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WordTagFrequency {
     private final Tags tags;
@@ -30,5 +28,21 @@ public class WordTagFrequency {
 
     public Map<String, int[]> getFrequency() {
         return this.frequency;
+    }
+
+    public String probableTag(String word) {
+        if (!frequency.containsKey(word)) {
+            return "UNK";
+        }
+        //List<Integer> l = new ArrayList<>(Arrays.stream(this.frequency.get(word)).boxed().toList());
+        int [] val = this.frequency.get(word);
+        int maxValuePos = 0;
+        for (int i = 0; i < val.length; i++) {
+            maxValuePos = val[i] > val[maxValuePos] ? i : maxValuePos;
+        }
+        if (val[maxValuePos] < 5) {
+            return "UNK";
+        }
+        return tags.getKey(maxValuePos);
     }
 }
