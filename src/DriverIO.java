@@ -2,10 +2,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class DriverIO {
+public abstract class DriverIO {
 
-    public static void writeToFile(WordTagFrequency wtf, Tags tags) {
+    public static void writeToFile(WordTagFrequency wtf, String path) {
+        Tags tags = wtf.getTags();
         List<String> ks = new ArrayList<>(tags.getTagsMap().keySet());
         List<Integer> kv = new ArrayList<>(tags.getTagsMap().values());
 
@@ -20,7 +23,7 @@ public class DriverIO {
         }
 
         try {
-            FileWriter myWriter = new FileWriter("out/PoS Output.txt");
+            FileWriter myWriter = new FileWriter(path);
             myWriter.write("Tags " + ks + "\n");
             for (String key: wtf.getFrequency().keySet()) {
                 myWriter.write(key + " " + Arrays.toString(wtf.getFrequency().get(key)) + "\n");
@@ -41,29 +44,27 @@ public class DriverIO {
             String tagsString = myReader.nextLine();
             Tags tags = new Tags();
 
-            tagsString = tagsString.replace("Tags [", "");
-            tagsString = tagsString.replace("]", ", ");
-            for (String t: tagsString.split(", ")) {
-                tags.addTag(t);
+            Pattern pattern = Pattern.compile("(.*?) \\[(.*?)\\]");
+            Matcher matcher = pattern.matcher(tagsString);
+            if (matcher.find()) {
+                for (String t: matcher.group(2).split(", ")) {
+                    System.out.println(t);
+                    tags.addTag(t);
+                }
             }
 
-            //Pattern pattern = Pattern.compile("(\\[?.+?,[ |\\]])");
-            //Matcher matcher = pattern.matcher(tagsString);
 
-            //boolean primeiro = true;
+            while (myReader.hasNextLine()) {
+                String cString = myReader.nextLine();
+                matcher = pattern.matcher(cString);
+                if (matcher.find()) {
 
-            //while (matcher.find()) {
-            //    String tag = matcher.group();
-            //    if (primeiro) {
-            //        //System.out.println(tag);
-            //    }
-            //    primeiro = false;
-            //    System.out.println(tag);
-            //}
+                    for (String t: matcher.group(2).split(", ")) {
 
-            //while (myReader.hasNextLine()) {
-            //    String data = myReader.nextLine();
-            //}
+                    }
+                }
+
+            }
 
             myReader.close();
         } catch (Exception e) {

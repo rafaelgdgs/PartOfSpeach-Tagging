@@ -23,7 +23,7 @@ public class WordTagFrequency {
             int[] al = new int[tags.getSize()];
             this.frequency.put(word, al);
         }
-        this.frequency.get(word)[n]++;// = this.frequency.get(word)[n]+1;
+        this.frequency.get(word)[n]++;
     }
 
     public Map<String, int[]> getFrequency() {
@@ -44,5 +44,9 @@ public class WordTagFrequency {
             return "UNK";
         }
         return tags.getKey(maxValuePos);
+    }
+
+    public Tags getTags() {
+        return this.tags;
     }
 }
