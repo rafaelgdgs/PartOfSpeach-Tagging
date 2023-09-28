@@ -5,15 +5,13 @@ import java.util.Map;
 public class WordTagFrequency {
     private final Tags tags;
 
-    private final PoSData pdata;
     private final Map<String, int[]> frequency;
 
     public WordTagFrequency(PoSData pd) {
-        this.pdata = pd;
-        this.tags = this.pdata.getTags();
+        this.tags = pd.getTags();
         this.frequency = new HashMap<>();
 
-        for (Sentence s : this.pdata.getSentences()) {
+        for (Sentence s : pd.getSentences()) {
             List<String> a = s.getWords();
             List<Integer> b = s.getTags();
             for (int i = 0; i < a.size(); i++) {

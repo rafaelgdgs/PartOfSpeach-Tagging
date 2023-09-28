@@ -7,7 +7,7 @@ public class Tags {
     private Integer size;
 
     public Tags() {
-        this.tags = new HashMap<String, Integer>();
+        this.tags = new HashMap<>();
         this.size = 0;
     }
 
@@ -18,9 +18,6 @@ public class Tags {
         return this.tags.get(tag);
     }
 
-    public int getTagValue(String tag) {
-        return this.tags.get(tag);
-    }
 
     public String[] getTagsArray() {
         return this.tags.keySet().toArray(String[]::new);

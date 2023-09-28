@@ -1,30 +1,42 @@
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class PoS {
 
     public static void main(String[] args) {
 
         String path = "data/Secs0-18 - training";
-		/*
-		if (args[0].isEmpty()) {
-			path = "/data/Secs0-18 - training";
-		}
-		else {
-			path = args[0];
-		}*/
 
         PoSData data = FileReader.readFromFile(path);
         WordTagFrequency wtf = new WordTagFrequency(data);
 
-        //System.out.println(Arrays.toString(data.getWordsArray()));
         System.out.println(Arrays.toString(data.getTagsArray()));
         System.out.println(Arrays.toString(data.getTagsIndex()));
 
-        for (String key: wtf.getFrequency().keySet()) {
-            //String value = Arrays.toString(wtf.getFrequency().get(key));
-            System.out.println(key + " " + Arrays.toString(wtf.getFrequency().get(key)));
+        List<String> ks = new ArrayList<>(data.getTags().getTagsMap().keySet());
+        List<Integer> kv = new ArrayList<>(data.getTags().getTagsMap().values());
+
+        List<Pair<String, Integer>> pairs = new ArrayList<>();
+
+        for (int i = 0; i < ks.size(); i++) {
+            pairs.add(new Pair<>(ks.get(i), kv.get(i)));
+        }
+        pairs.sort(Comparator.comparing(Pair::second));
+        for (int i = 0; i < pairs.size(); i++) {
+            ks.set(i, pairs.get(i).first());
+        }
+
+        try {
+            FileWriter myWriter = new FileWriter("out/PoS Output.txt");
+            myWriter.write("Tags" + ks + "\n");
+            for (String key: wtf.getFrequency().keySet()) {
+                myWriter.write(key + " " + Arrays.toString(wtf.getFrequency().get(key)) + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+                System.out.println("An error occurred");
+                e.printStackTrace();
         }
 
         try (Scanner scanner = new Scanner(System.in)) {
