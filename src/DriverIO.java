@@ -64,7 +64,7 @@ public abstract class DriverIO {
                     int[] freq = new int[sizeTags];
                     int i = 0;
                     for (String t: matcher.group(2).split(", ")) {
-                        freq[i] = Integer.parseInt(t);
+                        freq[i++] = Integer.parseInt(t);
                     }
                     wtf.addWordArray(matcher.group(1), freq);
                 }
