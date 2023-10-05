@@ -35,8 +35,8 @@ public abstract class DriverIO {
         }
     }
 
-    public static void readFromFile(String path) {
-        WordTagFrequency wtf = null;
+    public static WordTagFrequency readFromFile(String path) {
+        WordTagFrequency wtf = new WordTagFrequency();
         try {
             File myFile = new File(path);
             Scanner myReader = new Scanner(myFile);
@@ -46,24 +46,28 @@ public abstract class DriverIO {
 
             Pattern pattern = Pattern.compile("(.*?) \\[(.*?)\\]");
             Matcher matcher = pattern.matcher(tagsString);
+
+            int sizeTags = 0;
             if (matcher.find()) {
                 for (String t: matcher.group(2).split(", ")) {
-                    System.out.println(t);
                     tags.addTag(t);
+                    sizeTags++;
                 }
             }
-
+            wtf.setTags(tags);
 
             while (myReader.hasNextLine()) {
                 String cString = myReader.nextLine();
                 matcher = pattern.matcher(cString);
+
                 if (matcher.find()) {
-
+                    int[] freq = new int[sizeTags];
+                    int i = 0;
                     for (String t: matcher.group(2).split(", ")) {
-
+                        freq[i] = Integer.parseInt(t);
                     }
+                    wtf.addWordArray(matcher.group(1), freq);
                 }
-
             }
 
             myReader.close();
@@ -71,6 +75,6 @@ public abstract class DriverIO {
             System.out.println("An error occurred in the file reader.");
             e.printStackTrace();
         }
-        //return wtf;
+        return wtf;
     }
 }

@@ -1,11 +1,16 @@
 import java.util.*;
 
 public class WordTagFrequency {
-    private final Tags tags;
+    private Tags tags;
 
-    private final Map<String, int[]> frequency;
+    private Map<String, int[]> frequency;
 
-    public WordTagFrequency(PoSData pd) {
+    public WordTagFrequency() {
+        this.tags = new Tags();
+        this.frequency = new HashMap<>();
+    }
+
+    public void addPosData(PoSData pd) {
         this.tags = pd.getTags();
         this.frequency = new HashMap<>();
 
@@ -16,6 +21,10 @@ public class WordTagFrequency {
                 addWord(a.get(i), b.get(i));
             }
         }
+    }
+
+    public void addWordArray(String word, int[] array) {
+        this.frequency.put(word, array);
     }
 
     public void addWord(String word, int n) {
@@ -48,5 +57,9 @@ public class WordTagFrequency {
 
     public Tags getTags() {
         return this.tags;
+    }
+
+    public void setTags(Tags t) {
+        this.tags = t;
     }
 }
