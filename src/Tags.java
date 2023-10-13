@@ -6,9 +6,18 @@ public class Tags {
     private final Map<String, Integer> tags;
     private Integer size;
 
+    private static Tags instance;
+
     public Tags() {
         this.tags = new HashMap<>();
         this.size = 0;
+    }
+
+    public static Tags get() {
+        if (Tags.instance == null) {
+            Tags.instance = new Tags();
+        }
+        return Tags.instance;
     }
 
     public Integer addTag(String tag) {

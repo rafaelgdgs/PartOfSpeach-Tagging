@@ -55,6 +55,21 @@ public class WordTagFrequency {
         return tags.getKey(maxValuePos);
     }
 
+    public int probableTagInt(String word) {
+        if (!frequency.containsKey(word)) {
+            return -1;
+        }
+        int [] val = this.frequency.get(word);
+        int maxValuePos = 0;
+        for (int i = 0; i < val.length; i++) {
+            maxValuePos = val[i] > val[maxValuePos] ? i : maxValuePos;
+        }
+        if (val[maxValuePos] < 5) {
+            return -1;
+        }
+        return maxValuePos;
+    }
+
     public Tags getTags() {
         return this.tags;
     }

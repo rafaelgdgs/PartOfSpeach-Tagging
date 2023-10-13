@@ -6,6 +6,7 @@ public class PoS {
 
         String defaultPath = "/home/jhin/workdata/Secs0-18 - training";
         String defaultDrivePath = "/home/jhin/workdata/PoS Output.txt";
+        String defaultValidationPath = "/home/jhin/workdata/Secs22-24 - testing";
 
         WordTagFrequency wtf = null;
 
@@ -21,6 +22,7 @@ public class PoS {
             System.out.print("3.) Read WordTagFrequency from file.\n");
             System.out.print("4.) Test training data by words.\n");
             System.out.print("5.) List Tags vector.\n");
+            System.out.print("6.) Verify WTF accuracy.\n");
             System.out.print("9.) Exit\n");
             System.out.print("\nEnter Your Menu Choice: ");
 
@@ -41,6 +43,7 @@ public class PoS {
                     }
                     wtf = new WordTagFrequency();
                     wtf.addPosData(FileReader.readFromFile(pathChoice));
+                    System.out.println("Training data read");
                     break;
 
                 case 2:
@@ -55,6 +58,7 @@ public class PoS {
                         pathChoice = defaultDrivePath;
                     }
                     DriverIO.writeToFile(wtf, pathChoice);
+                    System.out.println("WordTagFrequency wrote to file");
                     break;
 
                 case 3:
@@ -65,6 +69,7 @@ public class PoS {
                         pathChoice = defaultDrivePath;
                     }
                     wtf = DriverIO.readFromFile(pathChoice);
+                    System.out.println("WordTagFrequency Read from file successful");
                     break;
 
                 case 4:
@@ -90,6 +95,20 @@ public class PoS {
                         break;
                     }
                     System.out.println(Arrays.toString(wtf.getTags().getTagsArray()));
+                    break;
+
+                case 6:
+                    if (wtf == null) {
+                        System.out.println("WordTagFrequency not initialized, Try another option.\n");
+                        break;
+                    }
+                    pathChoice = "";
+                    System.out.print("Enter the path to the WordTagFrequency data, or leave it blank to save to default path = '" + defaultDrivePath + "' :");
+                    pathChoice = input.nextLine();
+                    if (pathChoice.isEmpty()) {
+                        pathChoice = defaultValidationPath;
+                    }
+                    Validation.validateWTF(wtf, pathChoice);
                     break;
 
                 case 9:

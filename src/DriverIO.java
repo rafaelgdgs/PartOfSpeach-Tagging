@@ -42,7 +42,7 @@ public abstract class DriverIO {
             Scanner myReader = new Scanner(myFile);
 
             String tagsString = myReader.nextLine();
-            Tags tags = new Tags();
+            Tags tags = Tags.get();
 
             Pattern pattern = Pattern.compile("(.*?) \\[(.*?)\\]");
             Matcher matcher = pattern.matcher(tagsString);

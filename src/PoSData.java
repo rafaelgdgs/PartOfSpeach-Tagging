@@ -8,7 +8,7 @@ public class PoSData {
 
     public PoSData() {
         this.words = new ArrayList<Sentence>();
-        this.tags = new Tags();
+        this.tags = Tags.get();
     }
 
     public List<Sentence> getSentences() {
