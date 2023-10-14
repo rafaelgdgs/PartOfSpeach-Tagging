@@ -19,6 +19,6 @@ public class Validation {
                 }
             }
         }
-        System.out.println("Total words: " + wordsAmount + ", total correct: " + correctWordsAmount + ", Percent: " + ((double)correctWordsAmount/wordsAmount) * 100);
+        System.out.println("Total words: " + wordsAmount + ", total correct: " + correctWordsAmount + ", Percent: " + String.format("%.2f", ((double)correctWordsAmount/wordsAmount) * 100) + "%.");
     }
 }
