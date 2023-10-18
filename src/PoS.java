@@ -9,6 +9,7 @@ public class PoS {
         String defaultValidationPath = "/home/jhin/workdata/Secs22-24 - testing";
 
         WordTagFrequency wtf = null;
+        ConfMatrix cmat = null;
 
         Scanner input = new Scanner(System.in);
         int choice;
@@ -17,13 +18,14 @@ public class PoS {
 
         while(true) {
             System.out.println("PoS Main Menu\n");
-            System.out.print("1.) Read training data. \n");
-            System.out.print("2.) Write WordTagFrequency to file.\n");
-            System.out.print("3.) Read WordTagFrequency from file.\n");
-            System.out.print("4.) Test training data by words.\n");
-            System.out.print("5.) List Tags vector.\n");
-            System.out.print("6.) Verify WTF accuracy.\n");
-            System.out.print("9.) Exit\n");
+            System.out.println("1.) Read training data.");
+            System.out.println("2.) Write WordTagFrequency to file.");
+            System.out.println("3.) Read WordTagFrequency from file.");
+            System.out.println("4.) Test training data by words.");
+            System.out.println("5.) List Tags vector.");
+            System.out.println("6.) Verify WTF accuracy.");
+            System.out.println("7.) Show Confusion Matrix.");
+            System.out.println("9.) Exit");
             System.out.print("\nEnter Your Menu Choice: ");
 
             choice = input.nextInt();
@@ -111,6 +113,20 @@ public class PoS {
                     Validation.validateWTF(wtf, pathChoice);
                     break;
 
+                case 7:
+                    if (wtf == null) {
+                        System.out.println("WordTagFrequency not initialized, Try another option.\n");
+                        break;
+                    }
+                    pathChoice = "";
+                    System.out.print("Enter the path to the validation data, or leave it blank to save to default path = '" + defaultValidationPath + "' :");
+                    pathChoice = input.nextLine();
+                    if (pathChoice.isEmpty()) {
+                        pathChoice = defaultValidationPath;
+                    }
+                    cmat = new ConfMatrix(wtf, FileReader.readFromFile(pathChoice));
+                    cmat.showConfMatrix();
+                    break;
                 case 9:
                     System.out.println("Exiting Program...");
                     System.exit(0);
