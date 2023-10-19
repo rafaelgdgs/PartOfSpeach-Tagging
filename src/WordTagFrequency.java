@@ -41,7 +41,7 @@ public class WordTagFrequency {
 
     public String probableTag(String word) {
         if (!frequency.containsKey(word)) {
-            return "UNK";
+            return Tags.unknownTag;
         }
         //List<Integer> l = new ArrayList<>(Arrays.stream(this.frequency.get(word)).boxed().toList());
         int [] val = this.frequency.get(word);
@@ -50,14 +50,14 @@ public class WordTagFrequency {
             maxValuePos = val[i] > val[maxValuePos] ? i : maxValuePos;
         }
         if (val[maxValuePos] < 5) {
-            return "UNK";
+            return Tags.unknownTag;
         }
         return tags.getKey(maxValuePos);
     }
 
     public int probableTagInt(String word) {
         if (!frequency.containsKey(word)) {
-            return -1;
+            return tags.getTagValue(Tags.unknownTag);
         }
         int [] val = this.frequency.get(word);
         int maxValuePos = 0;
@@ -65,7 +65,7 @@ public class WordTagFrequency {
             maxValuePos = val[i] > val[maxValuePos] ? i : maxValuePos;
         }
         if (val[maxValuePos] < 5) {
-            return -1;
+            return tags.getTagValue(Tags.unknownTag);
         }
         return maxValuePos;
     }

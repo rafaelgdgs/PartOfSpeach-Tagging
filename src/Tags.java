@@ -5,12 +5,13 @@ public class Tags {
 
     private final Map<String, Integer> tags;
     private Integer size;
-
     private static Tags instance;
+    public static final String unknownTag = "UNK";
 
     public Tags() {
         this.tags = new HashMap<>();
         this.size = 0;
+        this.addTag(Tags.unknownTag);
     }
 
     public static Tags get() {
@@ -27,7 +28,6 @@ public class Tags {
         return this.tags.get(tag);
     }
 
-
     public String[] getTagsArray() {
         return this.tags.keySet().toArray(String[]::new);
     }
@@ -38,6 +38,13 @@ public class Tags {
 
     public Map<String, Integer> getTagsMap() {
         return this.tags;
+    }
+
+    public int getTagValue(String tag) {
+        if (!this.tags.containsKey(tag)) {
+            return this.tags.get("UNK");
+        }
+        return this.tags.get(tag);
     }
 
     public int getSize() {
