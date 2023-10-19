@@ -1,8 +1,8 @@
 public class ConfMatrix {
-    private Tags tags;
-    private int[][] confMatrix;
-    private WordTagFrequency wtf;
-    private PoSData val;
+    private final Tags tags;
+    private final int[][] confMatrix;
+    private final WordTagFrequency wtf;
+    private final PoSData val;
 
     public ConfMatrix(WordTagFrequency wtf, PoSData val) {
         this.wtf = wtf;
@@ -16,14 +16,12 @@ public class ConfMatrix {
     private void calculate() {
         for (Sentence sent: val.getSentences()) {
             for (Pair<String, Integer> pair: sent.getPairs()) {
-                //System.out.println("Valores: " + pair.second() + ", " + wtf.probableTagInt(pair.first()));
                 confMatrix[pair.second()][wtf.probableTagInt(pair.first())] += 1;
             }
         }
     }
 
     public void showConfMatrix() {
-        //System.out.println(Arrays.toString(tags.getTagsArray()));
         System.out.print("      ");
         for (int l = 0; l < tags.getSize(); l++) {
             System.out.printf("%5s ", tags.getKey(l));
