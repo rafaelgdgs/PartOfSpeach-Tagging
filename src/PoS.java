@@ -4,9 +4,9 @@ public class PoS {
 
     public static void main(String[] args) {
 
-        String defaultPath = "/home/jhin/workdata/Secs0-18 - training";
-        String defaultDrivePath = "/home/jhin/workdata/PoS Output.txt";
-        String defaultValidationPath = "/home/jhin/workdata/Secs22-24 - testing";
+        String defaultPath = "data/Secs0-18 - training";
+        String defaultDrivePath = "data/PoS Output.txt";
+        String defaultValidationPath = "data/Secs22-24 - testing";
 
         WordTagFrequency wtf = null;
         ConfMatrix cmat = null;
@@ -30,8 +30,6 @@ public class PoS {
 
             choice = input.nextInt();
             trash = input.nextLine();
-
-
 
 
             switch(choice){
@@ -136,15 +134,6 @@ public class PoS {
                     break;
 
             }
-
         }
-
-        //System.out.println(Arrays.toString(data.getTagsArray()));
-        //System.out.println(Arrays.toString(data.getTagsIndex()));
-
-        //System.out.println(Arrays.toString(wtf.getTags().getTagsArray()));
-
-
     }
-
 }
